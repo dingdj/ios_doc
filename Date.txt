@@ -1,0 +1,115 @@
+介绍Core Foundation中的Dates 和 Times 
+https://developer.apple.com/library/ios/documentation/CoreFoundation/Conceptual/CFDatesAndTimes/Concepts/DataReps.html#//apple_ref/doc/uid/20001139-CJBEJBHH
+
+这篇文章包含不同日期和时间的表示，包括时区，并且说明了如何使用这些对象。
+
+Date Representations
+
+CF提供了五种不同的时间表示：
+
+CFAbsoluteTime 一个特殊的时间点从1 January 2001 00:00:00 GMT开始。
+CFTimeInterval an interval of time in seconds 以秒来表示时间间隔
+CFGregorianDate 以Gregorian calender指定的时间点
+CFGregorianUnits  an interval of time in one or more of the units used in the Gregorian calendar
+CFDate an absolute time in the format of a Core Foundation opaque type
+
+CFAbsoluteTime
+
+CFAbsoluteTime  适用于一个指定的时间点
+                (包括了日期和时间) -32940326 代表了 December 16th, 1999 at 17:54:34
+                内部是一个double,能够使用标准的c比较操作。
+				
+CFTimeInterva   适用于当你需要度量一段时间。CFTimeInterval 代表一个用秒数来表示的消逝的时间。
+				内部是一个double,能够使用标准的c比较操作。
+				
+CFGregorianDate CFGregorianDate 代表时间以Gregorian calendar来表示，这个calendar广泛的用于欧洲和西半球从1582年起。 一个CFGregorianDate由
+				一个结构体实现，里面包含了独立的field, 如years, months, days, hours, minutes, and seconds. 一个CFGregorianDate能够和CFAbsoluteTime
+				互相转化。
+
+CFGregorianUnits 用CFGregorianDate的方式来代表时间间隔，比如100年10月等等。CFGregorianDate的某些字段不需要使用很大的范围，比如不能超过52个星期，
+                 不能超过24个小时，而CFGregorianUnits没这个限制。
+				 
+CFDate 是CF内部使用的类型，If you need to place a date in a Core Foundation property list，你就需要使用这个类型，内部是对absolute time进行了包装，
+       CFGregorianDate必须先转成CFAbsoluteTime后，再转成CFDate. CFDate可以使用内部标准的CF函数来比较。注意CFDate只能由absolute time来创建。不支持CFTimeInterval
+	   CFDate对象时不可变的。使用CFNumber来包装浮点值像CFTimeInterval一样。
+	   
+Time Zones
+
+CFDate 表示的都是GMT时间，为了转换一个GMT日期到你的本地时间你需要一个CFTimeZone对象。time zones are also named by country and region. 
+		For example the United States spans these times zones:
+		USA Eastern: -5 hours GMT
+		USA Indiana East: -5 hours GMT
+		USA Central: -6 hours GMT
+		USA Mountain: -7 hours GMT
+		USA Arizona: -7 hours GMT
+		USA Pacific: -8 hours GMT
+		USA Alaska: -9 hours GMT
+		USA Aleutian: -10 hours GMT
+		USA Hawaii: -10 hours GMT
+	   
+使用CFDate和CFTimeZone:
+
+创建
+
+获得当前时间的CFDate对象
+CFAbsoluteTime      absTime;
+CFDateRef           aCFDate;
+ 
+absTime = CFAbsoluteTimeGetCurrent();
+aCFDate = CFDateCreate(kCFAllocatorDefault, absTime);
+
+比较
+
+// Standard Core Foundation comparison result.
+CFComparisonResult result;
+ 
+// Create two CFDates from absolute time.
+date1 = CFDateCreate(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent());
+date2 = CFDateCreate(kCFAllocatorDefault, CFAbsoluteTimeGetCurrent());
+ 
+// Pass NULL for the context param.
+result = CFDateCompare(date1, date2, NULL);
+ 
+switch (result) {
+    case kCFCompareLessThan:
+        printf("date1 is before date2!\n");
+        break;
+    case kCFCompareEqualTo:
+        printf("date1 is the same as date2!\n");
+        break;
+    case kCFCompareGreaterThan:
+        printf("date1 is after date2!\n");
+        break;
+    }
+	
+	CFDateCompare 比较到秒的级别，如果你想要比较两个日期是否在一分钟以内，这可以通过把CFDates 转成绝对时间来进行比较
+
+转化
+将CFGregorianDate转成CFAbsoluteTime
+Boolean             status;
+CFGregorianDate     gregDate;
+CFAbsoluteTime      absTime;
+ 
+// Construct a Gregorian date.
+gregDate.year = 1999;
+gregDate.month = 11;
+gregDate.day = 23;
+gregDate.hour = 17;
+gregDate.minute = 33;
+gregDate.second = 22.7;
+ 
+// Check the validity of the date.
+status = CFGregorianDateIsValid(gregDate, kCFGregorianAllUnits);
+printf("Is my Gregorian date valid? %d\n", status);
+ 
+// Convert the Gregorian date to absolute time.
+absTime = CFGregorianDateGetAbsoluteTime(gregDate, NULL);
+printf("The Absolute Time from a Gregorian date is: %d\n", absTime);
+			
+                       
+
+
+Gregorian calendar 是一种时间的表示法
+GMT是一种约定 GMT中的时间都可以用Gregorian calendar形式来表现。
+
+			   

@@ -1,0 +1,1 @@
+对于block的简单的介绍https://developer.apple.com/library/ios/featuredarticles/Short_Practical_Guide_Blocks/index.html#//apple_ref/doc/uid/TP40009758块提供了强大的C语言特性是Cocoa application developments的一部分。类似于"closures"和"lambdas"你可以在很多语言中发现，如Ruby,Python,和Lisp.内容：为什么使用块系统Api中的块块和并发1.为什么使用块块是一个工作单元的封装。具体上来说是一段代码。可以在任何时候执行。实际上是一个方便的匿名函数
