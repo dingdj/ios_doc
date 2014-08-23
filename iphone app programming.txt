@@ -4,4 +4,91 @@
 
 适用于所有的ios设备。
 
+概要
+
+一个新app的起点是确定你的设计选择，并且知道如何将这些设计实现。
+
+I 将你的原始想法变成实际计划
+
+每个伟大的ios应用都始于一个伟大的想法，而将这些想法转变为现实需要计划。每个app都依赖与他的设计，并且设计会很大的影响到你的编码。所以在编码前，你需要花点时间来研究下所需要的技术和知识。
+这样你可以节省很多的时间和精力。
+   相关文章 “App Design Basics” https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/AppDesignBasics/AppDesignBasics.html#//apple_ref/doc/uid/TP40007072-CH2-SW1
+   
+   
+II UIKit提供了App的核心
+ios应用的核心是构建在UIKit框架提供的对象上。这些对象提供了所有的事件支持，屏幕内容的展示，和系统的交互。理解这些对象所扮演的角色，并且知道如何修改他们来定制行为，对于又快又正确的写app是很重要的。
+   相关文章 “Core App Objects”
+
+III App在前台和后台的不同行为
+ios设备同时运行着很多APP，但是只有一个前台app,可以获得用户的关注。前台app才能展示UI,响应触摸事件。后台的app一般处于睡眠状态但有时会运行一些代码。在前后台切换包括改变很多APP行为的方面。
+
+  相关文章 “App States and Multitasking”
+
+  
+IV iCloud影响数据模型设计和UI
+iCloud让你能够在不同的设备(包括ios和MAC)中共享用户数据。要使用iCloud的功能,你的应用需要增加一些特殊的行为。因为在iCloud上的文件不仅仅是你的设备能够访问，所有的文件操作都需要同步以防止数据丢失。根据
+你的app如何展现数据，iCloud需要改变如果屏幕的方向变化了。
+
+  相关文章：   Integrating iCloud Support Into Your App”
+  
+IIV App需要一些特殊的资源
+iosAPP需要一些资源，某些是必须的。大部分app包含images sounds 和其它类型的资源来展示UI,但是App Store需要更多的其它资源来展示。
+  相关文章：  “App-Related Resources”
+
+IIIV App在启动时需要回复他们的UI状态
+在启动时，app需要回复状态到上一次关闭时。在正常使用中，当app被终结了，系统会控制。当这发生时，app显示默认的UI当它被重新启动。使用状态回复，UIKit帮助你的app 回复之前的interface.这提供了一致的用户
+体验。
+  相关文章: “State Preservation and Restoration”
+  
+IU 很多app行为可以自定义
+app的核心架构都是相同的，但是有很多种方式能让你的应用与众不同。包括数据保护ＵＲＬ处理。VoIPAPP
+	相关文章:  “Advanced App Tricks”
+	
+IP App性能调谐
+ 不能很耗电，等等
+   相关文章:  “Performance Tuning”
+
+IY IOS环境影响了很多app行为
+  包括安全问题，内存管理，对硬件输入的响应。所有的这些系统行为都会影响到你的设计。
+  相关文章:  ““The iOS Environment”
+  
+如何使用本文档
+这篇文档提供了构成app的核心对象的重要信息，还有他们是如何协同工作的。没有指定特殊类型的IOS APP. 它提供了构建一个APP都需要的结构的说明，并且重点说明了你可以修改那些结构的哪些地方来满足特定需求。
+也提供了app核心架构的一些实现特征的Tip和guidance.
+
+
+预备知识
+
+起点。。如果你还没有搭建环境什么的 先看Start Developing iOS Apps Today.
+
+其它
+关于app的设计 可以查看下面的文档：
+
+iOS Human Interface Guidelines 包括IOS App 中一些设计的基本哲学。
+
+如果你不清楚在IOS app中什么是可能的，请阅读 iOS Technology Overview. 这本书提供了一系列的IOS技术，以及适用环境。在你项目的头脑风暴阶段是一个很好的参考。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
 
