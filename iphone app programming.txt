@@ -1,0 +1,7 @@
+关于IOS App Programming
+
+这篇文档是起点。它描述了ios apps的基本架构，包括你的代码如何和ios系统的代码结合。也提供了帮助你在设计做出更好的决定，并在ios Developer Library中如何找到具体问题的文档信息的实用指南。
+
+适用于所有的ios设备。
+
+
